@@ -1,0 +1,17 @@
+{
+  "name": "palavras",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts":{
+    "dev": "next dev"
+  },
+  "repository": "https://github.com/tiagoarodrigues55/palavras.git",
+  "author": "Tiago <tiago.americano.03@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "next": "^10.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
