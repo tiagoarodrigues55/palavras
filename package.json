@@ -2,7 +2,7 @@
   "name": "palavras",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts":{
+  "scripts": {
     "dev": "next dev"
   },
   "repository": "https://github.com/tiagoarodrigues55/palavras.git",
@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "next": "^10.0.7",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
   }
 }
