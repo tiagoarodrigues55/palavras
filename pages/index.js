@@ -9,13 +9,13 @@ function Home(){
   const [types, setStypes] =  useState(["Significado", "Sinônimos", "Expressão", "Citação"])
   const [texts, setTexts] =  useState(["", "", "", ""])
   const [displayTypes, setDisplayTypes] =  useState(["unvisible", "unvisible", "unvisible", "unvisible"])
+  const [words, setWords] = useState({word: '', relations:[]})
   function handleSubmit(event){
     event.preventDefault()
-    console.log(value)
-    axios.post("/api/getRelations", {value}).then(res=>{
-      setTexts([res.data.Significado, res.data.Sinônimos, res.data.Expressão, res.data.Citação])
-      setDisplayTypes([res.data.Significado ? "visible":"unvisible", res.data.Sinônimos ? "visible":"unvisible", res.data.Expressão ? "visible":"unvisible", res.data.Citação ? "visible":"unvisible"])
-      setResponse(res.data.value)
+    axios.post("/api/getRelations", {value}).then(  res=>{
+   
+     console.log(res.data.value)
+      setWords(res.data.value)
     })
   }
   function handleInput(event){
@@ -37,16 +37,9 @@ function Home(){
 
       </form>
       <div className="tiposRelações">
-        {
-        
-          types.map(type=>(
-            <div className="type">
-              <strong className={displayTypes[types.indexOf(type)]} onMouseLeave={()=>handleRelationType(type)} onMouseEnter={()=>handleRelationType(type)}>{type}</strong>
+        <div>{JSON.stringify(words)}</div>
       
-      <div className={visibleTypes[types.indexOf(type)]}>{texts[types.indexOf(type)]}</div>
-      </div>
-          ))
-        }
+      
   <div className="unvisible">{teste}</div>
       </div>
       <style jsx global>{`
@@ -54,8 +47,11 @@ function Home(){
         background-color: #1E90FF;
       }
       `}</style>
+      {response}
     </Styles>
   )
 }
 
 export default Home
+
+

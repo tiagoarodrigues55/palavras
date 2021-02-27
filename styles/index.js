@@ -25,11 +25,17 @@ display: none
 }
 div.tiposRelações{
   display: flex;
-  flex-direction:row;
+  flex-direction:column;
 justify-content: center;
 
   padding:30px;
   max-width:600px;
+}
+div.row{
+  display: flex;
+  flex-direction:row;
+  padding:30px;
+
 }
 div.type{
 padding:10px;
