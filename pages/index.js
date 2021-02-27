@@ -1,6 +1,7 @@
 import axios from "axios"
 import {useState} from "react"
 import Styles from '../styles/index'
+import Vis from '../Components'
 function Home(){
   const [value, setValue] = useState('')
   const [response, setResponse] = useState('')
@@ -9,7 +10,8 @@ function Home(){
   const [types, setStypes] =  useState(["Significado", "Sinônimos", "Expressão", "Citação"])
   const [texts, setTexts] =  useState(["", "", "", ""])
   const [displayTypes, setDisplayTypes] =  useState(["unvisible", "unvisible", "unvisible", "unvisible"])
-  const [words, setWords] = useState({word: '', relations:[]})
+  const [words, setWords] = useState({nodes: [], edges: []})
+
   function handleSubmit(event){
     event.preventDefault()
     axios.post("/api/getRelations", {value}).then(  res=>{
@@ -37,7 +39,6 @@ function Home(){
 
       </form>
       <div className="tiposRelações">
-        <div>{JSON.stringify(words)}</div>
       
       
   <div className="unvisible">{teste}</div>
@@ -47,7 +48,7 @@ function Home(){
         background-color: #1E90FF;
       }
       `}</style>
-      {response}
+      <Vis Nodes={words.nodes} Edges={words.edges}/>
     </Styles>
   )
 }

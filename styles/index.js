@@ -14,6 +14,10 @@ input{
   border-radius:5px;
 
 }
+div.Canvas{
+  width:100%;
+  height:100%
+}
 div.visible{
   background-color:blue;
   border-radius:5px;

@@ -38,8 +38,7 @@ if(!words){
 
 let wordsComplete = []
 	for(let i of words.split(", ")){
-		i = removeAcento(i)
-		const url4 = await axios.get(url(i)).then(res=>{
+		const url4 = await axios.get(url(removeAcento(i))).then(res=>{
 			// return res.data.slice(res.data.indexOf('<meta name="description"')+34, res.data.indexOf(';">')+1)
 			
 			return res.data.slice(res.data.indexOf('<li class=" analogico">')+32, res.data.indexOf('title="Palavras Relacionadas"')-2)
@@ -68,15 +67,37 @@ let wordsComplete = []
 		
 		})
 	})
-	// console.log(wordsComplete)
 
-	
-	// wordsComplete.map(res=>{
-	// 	res.relations.map(res2=>{
-	// 		console.log(res2)
-	// 	})
-	// })
-	return res.json({value: {word: palavra, relations:wordsComplete}})
+	const arr = []
+	wordsComplete.map(res=>{
+		arr.push(res.word)
+
+		res.relations.map(res2=>{
+			arr.push(res2)
+		})
+	})
+	var novaArr = arr.filter((este, i) => arr.indexOf(este.trim()) === i);
+	novaArr.sort().unshift(palavra)
+	const nodes = []
+	novaArr.map(res=>{
+		
+		nodes.push({id:novaArr.indexOf(res.trim())+1, label:res.trim()})
+	})
+	const edges = []
+	wordsComplete.map(res=>{
+		edges.push({from:1, to:novaArr.indexOf(res.word.trim())+1})
+		res.relations.map(res2=>{
+		
+			// novaArr.indexOf(res2.trim())===-1?console.log(res2, res):null
+		edges.indexOf({from: novaArr.indexOf(res2.trim())+1, to:novaArr.indexOf(res.word.trim())+1 })===-1 ? edges.push({from:novaArr.indexOf(res.word.trim())+1, to:novaArr.indexOf(res2.trim())+1}) : null
+		
+		})
+	})
+
+	console.log(nodes)
+	console.log(edges)
+	// console.log(wordsComplete)
+	return res.json({value: {nodes, edges}})
 }
 
 function url(palavra){
