@@ -71,19 +71,18 @@ let wordsComplete = []
 
 	const arr = []
 	wordsComplete.map(res=>{
-		arr.push(res.word)
+		arr.push(res.word.trim())
 
 		res.relations.map(res2=>{
-			arr.push(res2)
+			arr.push(res2.trim())
 		})
 	})
-	var novaArr = arr.filter((este, i) => arr.indexOf(este.trim()) === i);
-	novaArr.splice(novaArr.indexOf(palavra), 1)
-	novaArr.sort().unshift(palavra)
+	const novaArr = [...new Set(arr)];
 
+	novaArr.indexOf(palavra)!==-1?novaArr.splice(novaArr.indexOf(palavra), 1):null
+	novaArr.sort().unshift(palavra)
 	const nodes = []
 	const firstRelation = wordsComplete.map(res=>(res.word))
-	console.log(novaArr)
 	novaArr.map(res=>{
 		if(res===palavra){
 		nodes.push({id:novaArr.indexOf(res.trim())+1, label:res.trim(), font:{size:35, color:'red'}, color:{background: '#D2E5FF'}, shape:'text'})
@@ -91,7 +90,7 @@ let wordsComplete = []
 		}else{
 		if(firstRelation.indexOf(res)!==-1){
 			nodes.push({id:novaArr.indexOf(res.trim())+1, label:res.trim(), font:{size:25}, shape:'text'})
-
+			
 		}
 		// else{
 		// 	nodes.push({id:novaArr.indexOf(res.trim())+1, label:res.trim(), shape:'text'})
@@ -102,8 +101,9 @@ let wordsComplete = []
 	wordsComplete.map(res=>{
 		edges.push({from:1, to:novaArr.indexOf(res.word.trim())+1})
 		res.relations.map(res2=>{
+			
 			const index = Math.random()
-			nodes.push({id:index, label: res2.trim()})
+			nodes.push({id:index, label: res2.trim(), font:{size:16}})
 			edges.push({from: novaArr.indexOf(res.word.trim())+1, to: index})
 			// novaArr.indexOf(res2.trim())===-1?console.log(res2, res):null
 				// edges.indexOf({from: novaArr.indexOf(res2.trim())+1, to:novaArr.indexOf(res.word.trim())+1 })===-1 ? edges.push({from:novaArr.indexOf(res.word.trim())+1, to:novaArr.indexOf(res2.trim())+1}) : null
