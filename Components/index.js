@@ -8,6 +8,8 @@ const VisNetwork = ({Nodes, Edges}) => {
 
   // An array of nodes
 
+
+
   const nodes = new DataSet(Nodes);
 
   // An array of edges
@@ -17,9 +19,16 @@ const VisNetwork = ({Nodes, Edges}) => {
     nodes,
     edges
   };
-  const options = {height: '1000px',
-  width: '1000px',
- 
+  const options = {
+    height: '1000px',
+    width: '1300px',
+    nodes:{
+      // font : { 
+      //   color : '#343434' , 
+      //   size : 24 ,
+      // }
+    },
+   
 };
 
   useEffect(
